@@ -1,6 +1,7 @@
 # Testing git tagging
 
 
+bufix
 remove that mod
 name: Run CI
 on: [push, pull_request]
