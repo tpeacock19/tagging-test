@@ -5,23 +5,22 @@ on:
     types: [released]
 
 jobs:
-  build:
+  productionPromotion:
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      pull-requests: write
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v4
-
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v7
-      with:
-        token: ${{ secrets.RELEASE_TOKEN }}
-        branch: staging
-        body: ${{github.event.release.name}} Release Deployment
-        base: main
-        reviewers: tpeacock19
-        labels: deploy release
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Reset promotion branch
+        run: |
+          git fetch origin staging:staging
+          git reset --hard staging
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: production-promotion
+          token: ${{ secrets.RELEASE_TOKEN }}
+          body: ${{github.event.release.name}} Release Deployment
+          base: main
+          reviewers: tpeacock19
+          labels: deploy release
