@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.11.0](https://github.com/tpeacock19/tagging-test/compare/v0.10.0...v0.11.0) (2024-11-24)
+
+
+### Features
+
+* added second file ([8e52b03](https://github.com/tpeacock19/tagging-test/commit/8e52b031e6840c31180d62009bf44109e0c48195))
+
+
+### Bug Fixes
+
+* bugfix in readme ([ccfa9e4](https://github.com/tpeacock19/tagging-test/commit/ccfa9e4a60d041e0ad8a0d23b89497c053c380c0))
+
 ## [0.10.0](https://github.com/tpeacock19/tagging-test/compare/v0.9.3...v0.10.0) (2024-11-24)
 
 
