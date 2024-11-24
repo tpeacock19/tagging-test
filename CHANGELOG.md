@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.1](https://github.com/tpeacock19/tagging-test/compare/v0.9.0...v0.9.1) (2024-11-24)
+
+
+### Bug Fixes
+
+* actions ([0a6e833](https://github.com/tpeacock19/tagging-test/commit/0a6e8339dc118314ff50648ce8a9cc7238080309))
+
 ## [0.9.0](https://github.com/tpeacock19/tagging-test/compare/v0.8.0...v0.9.0) (2024-11-24)
 
 
