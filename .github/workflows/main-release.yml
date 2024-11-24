@@ -1,28 +1,27 @@
 # example 2: on merge to master from pull request (recommended)
 name: Main Release PR
 on:
-  pull_request:
-    types:
-      - closed
-    branches:
-      - staging
+  release:
+    types: [released]
 
 jobs:
   build:
-    if: ${{github.event.pull_request.merged == true && github.head_ref == 'release-please--branches-staging'}}
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+
     permissions:
       contents: write
+      pull-requests: write
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      with:
-        ref: ${{ github.event.pull_request.merge_commit_sha }}
-        fetch-depth: '0'
 
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v7
       with:
         token: ${{ secrets.RELEASE_TOKEN }}
         branch: staging
+        body: ${{github.event.release.name}} Release Deployment
         base: main
+        reviewers: tpeacock19
+        labels: deploy release
