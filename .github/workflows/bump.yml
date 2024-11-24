@@ -1,5 +1,5 @@
 # example 2: on merge to master from pull request (recommended)
-name: Bump version
+name: Create Release
 on:
   pull_request:
     types:
@@ -21,8 +21,51 @@ jobs:
         fetch-depth: '0'
 
     - name: Bump version and push tag
+      id: tag
       uses: anothrNick/github-tag-action@v1 # Don't use @master or @v1 unless you're happy to test the latest version
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
         WITH_V: true
-        PRERELEASE: true
+        DEFAULT_BRANCH: main
+        RELEASE_BRANCHES: main
+
+    - name: automatic-release
+      uses: softprops/action-gh-release@v2
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        tag_name: ${{ steps.tag.outputs.new_tag }}
+        generate_release_notes: true
+        prerelease: false
+        draft: true
+          
+# example 2: on merge to master from pull request (recommended)
+name: Bump version
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - main
+
+jobs:
+  build:
+    if: ${{github.event.pull_request.merged == true && github.head_ref == 'main_fixes'}}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.merge_commit_sha }}
+        fetch-depth: '0'
+
+    - name: Bump version and push tag
+      uses: anothrNick/github-tag-action@v1 # Don't use @master or @v1 unless you're happy to test the latest version
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
+        WITH_V: true
+        DEFAULT_BRANCH: main
+        RELEASE_BRANCHES: main
+        DEFAULT_BUMP: patch
+        
