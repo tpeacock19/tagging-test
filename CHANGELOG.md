@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.3](https://github.com/tpeacock19/tagging-test/compare/v0.9.2...v0.9.3) (2024-11-24)
+
+
+### Bug Fixes
+
+* another update for releases ([d391a10](https://github.com/tpeacock19/tagging-test/commit/d391a104c6eaa808226736b0c4e7bf8f9a987ea5))
+
 ## [0.9.2](https://github.com/tpeacock19/tagging-test/compare/v0.9.1...v0.9.2) (2024-11-24)
 
 
