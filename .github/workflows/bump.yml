@@ -20,7 +20,7 @@ jobs:
         ref: ${{ github.event.pull_request.merge_commit_sha }}
         fetch-depth: '0'
 
-    - name: Bump version and push tag
+    - name: Rapid Fixes Version Bump
       id: tag-fix
       if: ${{github.head_ref == 'main_fixes'}}
       uses: anothrNick/github-tag-action@v1 # Don't use @master or @v1 unless you're happy to test the latest version
@@ -28,10 +28,9 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
         WITH_V: true
         DEFAULT_BRANCH: main
-        RELEASE_BRANCHES: main
         DEFAULT_BUMP: patch
         
-    - name: Bump version and push tag
+    - name: Staging Version Bump
       id: tag-main
       if: ${{github.head_ref == 'staging'}}
       uses: anothrNick/github-tag-action@v1 # Don't use @master or @v1 unless you're happy to test the latest version
@@ -39,9 +38,8 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
         WITH_V: true
         DEFAULT_BRANCH: main
-        RELEASE_BRANCHES: main
 
-    - name: automatic-release
+    - name: Staging Release
       if: ${{github.head_ref == 'staging'}}
       uses: softprops/action-gh-release@v2
       with:
