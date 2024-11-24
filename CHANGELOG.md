@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.9.2](https://github.com/tpeacock19/tagging-test/compare/v0.9.1...v0.9.2) (2024-11-24)
+
+
+### Bug Fixes
+
+* one more attempt at auto release management ([2bab81f](https://github.com/tpeacock19/tagging-test/commit/2bab81f957ccdc44788bb50363a1034b9eedb165))
+
 ## [0.9.1](https://github.com/tpeacock19/tagging-test/compare/v0.9.0...v0.9.1) (2024-11-24)
 
 
