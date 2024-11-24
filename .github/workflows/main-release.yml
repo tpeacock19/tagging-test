@@ -1,5 +1,5 @@
 # example 2: on merge to master from pull request (recommended)
-name: Hotfix Version Bump
+name: Main Release PR
 on:
   pull_request:
     types:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   build:
-    if: ${{github.event.pull_request.merged == true && github.head_ref == 'release-please*'}}
+    if: ${{github.event.pull_request.merged == true && github.head_ref == 'release-please**'}}
     runs-on: ubuntu-22.04
     permissions:
       contents: write
