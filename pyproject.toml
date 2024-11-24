@@ -1,6 +1,6 @@
 [project]
 name = "tagging"
-version = "0.9.1"
+version = "0.9.2"
 description = "Default template for PDM package"
 authors = [
     {name = "Trey Peacock", email = "git@treypeacock.com"},
