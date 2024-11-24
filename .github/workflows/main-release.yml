@@ -1,0 +1,28 @@
+# example 2: on merge to master from pull request (recommended)
+name: Hotfix Version Bump
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - staging
+
+jobs:
+  build:
+    if: ${{github.event.pull_request.merged == true && github.head_ref == 'release-please*'}}
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        ref: ${{ github.event.pull_request.merge_commit_sha }}
+        fetch-depth: '0'
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v7
+      with:
+        token: ${{ secrets.RELEASE_TOKEN }}
+        branch: staging
+        base: main
