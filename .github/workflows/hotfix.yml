@@ -1,5 +1,5 @@
 # example 2: on merge to master from pull request (recommended)
-name: Create Release
+name: Hotfix Version Bump
 on:
   pull_request:
     types:
@@ -30,22 +30,3 @@ jobs:
         DEFAULT_BRANCH: main
         DEFAULT_BUMP: patch
         RELEASE_BRANCHES: main
-
-    - name: Staging Version Bump
-      id: tag_release
-      if: ${{github.head_ref == 'staging'}}
-      uses: anothrNick/github-tag-action@v1 # Don't use @master or @v1 unless you're happy to test the latest version
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # if you don't want to set write permissions use a PAT token
-        WITH_V: true
-        DEFAULT_BRANCH: main
-        RELEASE_BRANCHES: main
-
-    - name: Staging Release
-      if: ${{github.head_ref == 'staging'}}
-      uses: softprops/action-gh-release@v2
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        tag_name: ${{ steps.tag_release.outputs.new_tag }}
-        generate_release_notes: true
-        prerelease: false

@@ -1,0 +1,26 @@
+# example 2: on merge to master from pull request (recommended)
+name: Main Release PR
+on:
+  release:
+    types: [released]
+
+jobs:
+  productionPromotion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Reset promotion branch
+        run: |
+          git fetch origin staging:staging
+          git reset --hard staging
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          branch: production-promotion
+          token: ${{ secrets.RELEASE_TOKEN }}
+          body: ${{github.event.release.name}} Release Deployment
+          base: main
+          reviewers: tpeacock19
+          labels: deploy release
